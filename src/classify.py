@@ -100,6 +100,10 @@ _cache = None
 def get_model():
     global _cache
     if _cache is None:
+        if not MODEL_PATH.exists():
+            # Deployed environments start from a clean clone and the pickle is
+            # gitignored, so train on first use.
+            train(verbose=False)
         with open(MODEL_PATH, "rb") as f:
             _cache = pickle.load(f)
     return _cache
