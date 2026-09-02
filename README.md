@@ -5,7 +5,7 @@ into eight underwriting fields, and routes it to **BOP**, **General Liability**,
 **Professional Liability**, **underwriter referral**, or **decline** against a
 configurable appetite guide — with a full audit trail behind every decision.
 
-**Live demo:** _(add your Streamlit Cloud URL here)_
+**Live demo:** https://sharwani-submission-triage.streamlit.app
 
 ---
 
