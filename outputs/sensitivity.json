@@ -1,0 +1,36 @@
+{
+  "baseline_quote_ready_rate": 0.148,
+  "ceiling_with_complete_data": 0.287,
+  "gap": 0.139,
+  "per_field_lift": {
+    "loss_history": {
+      "quote_ready_rate_if_always_supplied": 0.193,
+      "absolute_lift_pp": 4.5
+    },
+    "naics": {
+      "quote_ready_rate_if_always_supplied": 0.179,
+      "absolute_lift_pp": 3.1
+    },
+    "revenue": {
+      "quote_ready_rate_if_always_supplied": 0.168,
+      "absolute_lift_pp": 2.0
+    },
+    "limit_occurrence": {
+      "quote_ready_rate_if_always_supplied": 0.163,
+      "absolute_lift_pp": 1.5
+    },
+    "location": {
+      "quote_ready_rate_if_always_supplied": 0.156,
+      "absolute_lift_pp": 0.8
+    },
+    "payroll": {
+      "quote_ready_rate_if_always_supplied": 0.143,
+      "absolute_lift_pp": -0.5
+    },
+    "deductible": {
+      "quote_ready_rate_if_always_supplied": 0.143,
+      "absolute_lift_pp": -0.5
+    }
+  },
+  "all_fields_supplied": 0.291
+}

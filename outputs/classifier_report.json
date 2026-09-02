@@ -1,0 +1,11 @@
+{
+  "n_train": 533,
+  "seen_wording": {
+    "n": 124,
+    "accuracy": 1.0
+  },
+  "unseen_wording": {
+    "n": 343,
+    "accuracy": 0.5423
+  }
+}

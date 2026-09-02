@@ -1,0 +1,74 @@
+# Carrier appetite guide (synthetic, modeled on typical small-commercial appetite)
+# Evaluated top-to-bottom within each stage. First match wins.
+
+version: "1.0"
+
+# ---------------------------------------------------------------
+# Stage 1 - hard declines. Class or exposure outside appetite entirely.
+# ---------------------------------------------------------------
+declines:
+  - id: DEC-01
+    reason: "Excluded class - habitational / construction trade above appetite"
+    naics_prefix: ["2362", "2381", "2383"]
+  - id: DEC-02
+    reason: "Excluded class - firearms, cannabis, adult entertainment"
+    naics_prefix: ["4593", "1114", "7132"]
+  - id: DEC-03
+    reason: "Excluded state - carrier not admitted"
+    states: ["FL", "LA", "AK"]
+  - id: DEC-04
+    reason: "Revenue exceeds middle-market cutoff for this program"
+    revenue_min: 50000000
+  - id: DEC-05
+    reason: "Severe loss history - 3+ claims and $250k+ incurred in 5 years"
+    loss_count_min: 3
+    loss_incurred_min: 250000
+
+# ---------------------------------------------------------------
+# Stage 2 - mandatory underwriter referral. In appetite but not straight-through.
+# ---------------------------------------------------------------
+referrals:
+  - id: REF-01
+    reason: "Revenue above $15M - requires underwriter pricing review"
+    revenue_min: 15000000
+  - id: REF-02
+    reason: "Loss history present - any incurred loss over $75k in 5 years"
+    loss_incurred_min: 75000
+  - id: REF-03
+    reason: "Requested limit above $2M occurrence authority"
+    limit_occurrence_min: 2000001
+  - id: REF-04
+    reason: "Deductible below $1,000 outside filed options"
+    deductible_max: 999
+  - id: REF-05
+    reason: "Payroll above $5M - class rating requires manual review"
+    payroll_min: 5000000
+  - id: REF-06
+    reason: "Frequency signal - 2 or more claims in 5 years"
+    loss_count_min: 2
+
+# ---------------------------------------------------------------
+# Stage 3 - product routing for clean, in-appetite risks.
+# ---------------------------------------------------------------
+products:
+  - id: PRD-PL
+    product: "PL"
+    reason: "Professional services class - E&O exposure is the primary driver"
+    naics_prefix: ["5411", "5412", "5413", "5415", "5416", "5417", "6211", "6213"]
+  - id: PRD-BOP
+    product: "BOP"
+    reason: "Eligible small commercial - property + liability packageable"
+    naics_prefix: ["4451", "4453", "4481", "4529", "5312", "7225", "8121", "8123", "4441"]
+    revenue_max: 6000000
+    payroll_max: 2000000
+  - id: PRD-GL
+    product: "GL"
+    reason: "Liability-only exposure or size above BOP eligibility"
+    naics_prefix: ["4451", "4453", "4481", "4529", "5312", "7225", "8121", "8123", "4441",
+                   "5617", "4841", "3231", "5321", "7139", "5622"]
+
+# Anything reaching the end of stage 3 unmatched:
+fallback:
+  id: REF-99
+  route: "REFERRAL"
+  reason: "Class not found in appetite table - underwriter classification needed"
